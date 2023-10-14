@@ -29,6 +29,11 @@ res_file = "godot_res.rc"
 res_target = "godot_res" + env["OBJSUFFIX"]
 res_obj = env.RES(res_target, res_file)
 
+if env.msvc:
+    env.Append(LINKFLAGS=["/FIXED:NO"])
+else:
+    env.Append(LINKFLAGS=["-fpie"])
+
 prog = env.add_program("#bin/godot", common_win + res_obj, PROGSUFFIX=env["PROGSUFFIX"])
 
 # Build console wrapper app.
