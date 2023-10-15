@@ -632,7 +632,6 @@ if selected_platform in platform_list:
         env.Append(CCFLAGS=["-fpie", "-fPIC", "-fvisibility=hidden"])
         env.Append(LINKFLAGS=["-pie", "-Wl,-z,notext"])
 
-
     # Needs to happen after configure to handle "auto".
     if env["lto"] != "none":
         print("Using LTO: " + env["lto"])
