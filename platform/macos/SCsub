@@ -28,8 +28,8 @@ files = [
     "gl_manager_macos_legacy.mm",
 ]
 
-env.Append(CCFLAGS=["-fpie","-fvisibility=hidden"])
-env.Append(LINKFLAGS=["-pie","-Wl"])
+env.Append(CCFLAGS=["-fpie", "-fvisibility=hidden"])
+env.Append(LINKFLAGS=["-pie", "-Wl"])
 
 prog = env.add_program("#bin/godot", files)
 
