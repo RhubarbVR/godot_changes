@@ -467,13 +467,6 @@ if not env_base["deprecated"]:
 if env_base["precision"] == "double":
     env_base.Append(CPPDEFINES=["REAL_T_IS_DOUBLE"])
 
-if env_base.msvc:
-    env_base.Append(CCFLAGS=["/MD"])
-    env_base.Append(LINKFLAGS=["/FIXED:NO"])
-else:
-    env_base.Append(CCFLAGS=["-fpie", "-fPIC", "-fvisibility=hidden"])
-    env_base.Append(LINKFLAGS=["-pie", "-Wl,-z,notext"])
-
 if selected_platform in platform_list:
     tmppath = "./platform/" + selected_platform
     sys.path.insert(0, tmppath)
@@ -631,6 +624,14 @@ if selected_platform in platform_list:
             env.Append(CCFLAGS=["-Og"])
         elif env["optimize"] == "none":
             env.Append(CCFLAGS=["-O0"])
+
+    if env.msvc:
+        env.Append(CCFLAGS=["/MD"])
+        env.Append(LINKFLAGS=["/FIXED:NO"])
+    else:
+        env.Append(CCFLAGS=["-fpie", "-fPIC", "-fvisibility=hidden"])
+        env.Append(LINKFLAGS=["-pie", "-Wl,-z,notext"])
+
 
     # Needs to happen after configure to handle "auto".
     if env["lto"] != "none":
