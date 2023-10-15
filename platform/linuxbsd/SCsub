@@ -36,7 +36,8 @@ if env["dbus"]:
     if env["use_sowrap"]:
         common_linuxbsd.append("dbus-so_wrap.c")
 
-env.Append(LINKFLAGS=["-fpie"])
+env.Append(CCFLAGS=["-fpie","-fvisibility=hidden"])
+env.Append(LINKFLAGS=["-pie","-Wl"])
 
 prog = env.add_program("#bin/godot", ["godot_linuxbsd.cpp"] + common_linuxbsd)
 
