@@ -414,6 +414,7 @@ env_base.editor_build = env_base["target"] == "editor"
 env_base.dev_build = env_base["dev_build"]
 env_base.debug_features = env_base["target"] in ["editor", "template_debug"]
 
+
 if env_base.dev_build:
     opt_level = "none"
 elif env_base.debug_features:
@@ -465,6 +466,13 @@ if not env_base["deprecated"]:
 
 if env_base["precision"] == "double":
     env_base.Append(CPPDEFINES=["REAL_T_IS_DOUBLE"])
+
+if env_base.msvc:
+    env_base.Append(CCFLAGS=["/MD"])
+    env_base.Append(LINKFLAGS=["/FIXED:NO"])
+else:
+    env_base.Append(CCFLAGS=["-fpie", "-fPIC", "-fvisibility=hidden"])
+    env_base.Append(LINKFLAGS=["-pie", "-Wl,-z,notext"])
 
 if selected_platform in platform_list:
     tmppath = "./platform/" + selected_platform
