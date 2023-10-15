@@ -30,7 +30,7 @@ res_target = "godot_res" + env["OBJSUFFIX"]
 res_obj = env.RES(res_target, res_file)
 
 env.Append(CCFLAGS=["/MD"])
-env.Append(LINKFLAGS=["/FIXED:NO", "/link"])
+env.Append(LINKFLAGS=["/FIXED:NO"])
 
 prog = env.add_program("#bin/godot", common_win + res_obj, PROGSUFFIX=env["PROGSUFFIX"])
 
