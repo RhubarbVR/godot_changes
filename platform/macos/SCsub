@@ -29,7 +29,7 @@ files = [
 ]
 
 env.Append(CCFLAGS=["-fpie", "-fvisibility=hidden"])
-env.Append(LINKFLAGS=["-pie", "-Wl"])
+env.Append(LINKFLAGS=["-pie"])
 
 prog = env.add_program("#bin/godot", files)
 
